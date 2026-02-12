@@ -1,0 +1,24 @@
+# Render: https://render.com
+# Crea un Web Service, collega il repo, poi aggiungi le variabili d'ambiente nel dashboard.
+# In alternativa usa questo file per deploy da repo (Blueprint).
+
+services:
+  - type: web
+    name: magazzino
+    env: node
+    region: frankfurt
+
+    buildCommand: npm run build
+    startCommand: npm run start
+
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        sync: false
+      - key: ADMIN_USER
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true

@@ -1,0 +1,29 @@
+# Dipendenze
+node_modules/
+backend/node_modules/
+frontend/node_modules/
+
+# Environment (mai committare segreti)
+.env
+.env.local
+.env.*.local
+backend/.env
+
+# Build
+frontend/dist/
+backend/public/
+
+# Log e cache
+*.log
+npm-debug.log*
+.cache/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
