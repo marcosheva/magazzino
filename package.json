@@ -6,7 +6,7 @@
     "dev:backend": "npm run dev --prefix backend",
     "dev:frontend": "npm run dev --prefix frontend",
     "install:all": "cd backend && npm install && cd ../frontend && npm install",
-    "build": "npm run install:all && cd frontend && npm run build && cd .. && node scripts/copy-public.cjs",
+    "build": "npm run install:all && cd frontend && npx vite build && cd .. && node scripts/copy-public.cjs",
     "start": "cd backend && node server.js"
   },
   "devDependencies": {
