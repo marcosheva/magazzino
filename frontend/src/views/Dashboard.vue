@@ -24,6 +24,11 @@
           <span class="stat-label">Valore magazzino</span>
           <span class="stat-value num">{{ formatEuro(stats.valoreMagazzino) }}</span>
         </div>
+        <router-link to="/cassa" class="stat-card stat-cassa">
+          <span class="stat-label">Saldo cassa</span>
+          <span class="stat-value num" :class="saldoCassa >= 0 ? 'saldo-ok' : 'saldo-neg'">{{ formatEuro(saldoCassa) }}</span>
+          <span class="stat-link">Vai a Cassa →</span>
+        </router-link>
       </div>
 
       <section class="section" v-if="prodottiSottoSoglia.length">
@@ -84,6 +89,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { getStats, getProducts } from '../api/products';
+import { getCassaSaldo } from '../api/cassa.js';
 
 const loading = ref(true);
 const error = ref('');
@@ -94,6 +100,7 @@ const stats = ref({
   valoreMagazzino: 0,
 });
 const prodottiSottoSoglia = ref([]);
+const saldoCassa = ref(0);
 
 function formatEuro(n) {
   return new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR' }).format(n ?? 0);
@@ -101,12 +108,14 @@ function formatEuro(n) {
 
 onMounted(async () => {
   try {
-    const [statsData, prodottiList] = await Promise.all([
+    const [statsData, prodottiList, saldo] = await Promise.all([
       getStats(),
       getProducts({ sottoSoglia: 'true' }),
+      getCassaSaldo().catch(() => 0),
     ]);
     stats.value = statsData;
     prodottiSottoSoglia.value = prodottiList || [];
+    saldoCassa.value = saldo ?? 0;
   } catch (e) {
     error.value = e.message || 'Errore caricamento statistiche';
   } finally {
@@ -178,6 +187,27 @@ onMounted(async () => {
 .stat-link {
   font-size: 0.875rem;
   margin-top: 0.25rem;
+}
+
+.stat-card.stat-cassa {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.stat-card.stat-cassa:hover {
+  border-color: var(--accent);
+  background: var(--surface-hover);
+}
+
+.stat-value.saldo-ok {
+  color: var(--accent);
+}
+
+.stat-value.saldo-neg {
+  color: var(--danger);
 }
 
 .section {

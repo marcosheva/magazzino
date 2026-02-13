@@ -6,6 +6,7 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import productsRouter from './routes/products.js';
 import movementsRouter from './routes/movements.js';
+import cassaRouter from './routes/cassa.js';
 import authRouter from './routes/auth.js';
 import { authMiddleware } from './middleware/auth.js';
 
@@ -20,6 +21,7 @@ app.use(express.json());
 app.use('/api/auth', authRouter);
 app.use('/api/products', authMiddleware, productsRouter);
 app.use('/api/movements', authMiddleware, movementsRouter);
+app.use('/api/cassa', authMiddleware, cassaRouter);
 
 app.get('/api/health', (_, res) => res.json({ ok: true }));
 

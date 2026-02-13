@@ -13,6 +13,7 @@
           <router-link to="/" @click="menuOpen = false">Dashboard</router-link>
           <router-link to="/prodotti" @click="menuOpen = false">Prodotti</router-link>
           <router-link to="/movimenti" @click="menuOpen = false">Movimenti</router-link>
+          <router-link to="/cassa" @click="menuOpen = false">Cassa</router-link>
           <router-link to="/prodotti/nuovo" @click="menuOpen = false">Nuovo</router-link>
           <button type="button" class="btn btn-ghost logout-btn" @click="logout">Esci</button>
         </nav>

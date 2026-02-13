@@ -9,6 +9,7 @@ const routes = [
   { path: '/prodotti/:id', name: 'DettaglioProdotto', component: () => import('../views/ProductDetail.vue'), meta: { title: 'Dettaglio' } },
   { path: '/prodotti/:id/modifica', name: 'ModificaProdotto', component: () => import('../views/ProductForm.vue'), meta: { title: 'Modifica prodotto' } },
   { path: '/movimenti', name: 'Movimenti', component: () => import('../views/Movements.vue'), meta: { title: 'Storico movimenti' } },
+  { path: '/cassa', name: 'Cassa', component: () => import('../views/Cassa.vue'), meta: { title: 'Cassa' } },
 ];
 
 const router = createRouter({
